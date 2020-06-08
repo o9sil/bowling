@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.bowling.BowlingMapper">
+
+	<select id="selectScoreRankList" resultType="com.gdu.bowling.ScoreRanking">
+		SELECT 
+			s.member_name AS memberName, 
+			p.pinboard_frame_one_first AS pinboardFrameOneFirst, 
+			p.pinboard_frame_one_second AS pinboardFrameOneSecond, 
+			p.pinboard_frame_two_first AS pinboardFrameTwoFirst, 
+			p.pinboard_frame_two_second AS pinboardFrameTwoSecond,
+			p.pinboard_frame_three_first AS pinboardFrameThreeFirst, 
+			p.pinboard_frame_three_second AS pinboardFrameThreeSecond, 
+			p.pinboard_frame_four_first AS pinboardFrameFourFirst, 
+			p.pinboard_frame_four_second AS pinboardFrameFourSecond,
+			p.pinboard_frame_five_first AS pinboardFrameFiveFirst, 
+			p.pinboard_frame_five_second AS pinboardFrameFiveSecond, 
+			p.pinboard_frame_six_first AS pinboardFrameSixFirst, 
+			p.pinboard_frame_six_second AS pinboardFrameSixSecond,
+			p.pinboard_frame_seven_first AS pinboardFrameSevenFirst, 
+			p.pinboard_frame_seven_second AS pinboardFrameSevenSecond, 
+			p.pinboard_frame_eight_first AS pinboardFrameEightFirst, 
+			p.pinboard_frame_eight_second AS pinboardFrameEightSecond,
+			p.pinboard_frame_nine_first AS pinboardFrameNineFirst, 
+			p.pinboard_frame_nine_second AS pinboardFrameNineSecond, 
+			p.pinboard_frame_ten_first AS pinboardFrameTenFirst, 
+			p.pinboard_frame_ten_second AS pinboardFrameTenSecond, 
+			p.pinboard_frame_ten_third AS pinboardFrameTenThird,
+			f.framescore_score_one AS framescoreScoreOne,
+			f.framescore_score_two AS framescoreScoreTwo,
+			f.framescore_score_three AS framescoreScoreThree,
+			f.framescore_score_four AS framescoreScoreFour,
+			f.framescore_score_five AS framescoreScoreFive,
+			f.framescore_score_six AS framescoreScoreSix,
+			f.framescore_score_seven AS framescoreScoreSeven,
+			f.framescore_score_eight AS framescoreScoreEight,
+			f.framescore_score_nine AS framescoreScoreNine,
+			f.framescore_score_ten AS framescoreScoreTen
+		FROM bowling_pinboard p, bowling_framescore f, bowling_scoreboard s 
+		WHERE p.pinboard_no = s.pinboard_no 
+		AND f.framescore_no = s.framescore_no 
+		AND p.pinboard_no
+			IN(
+				SELECT pinboard_no 
+				FROM bowling_scoreboard
+				WHERE framescore_no 
+				IN (
+				SELECT framescore_no 
+				FROM bowling_framescore)) 
+			ORDER BY f.framescore_score_ten DESC
+			LIMIT 10
+	</select>
+
+
+	<insert id="insertPinBoardOne" parameterType="com.gdu.bowling.PinBoard" useGeneratedKeys="true" keyProperty="pinboardNo">
+		INSERT INTO bowling_pinboard(
+			pinboard_frame_one_first,
+			pinboard_frame_one_second,
+			pinboard_frame_two_first,
+			pinboard_frame_two_second,
+			pinboard_frame_three_first,
+			pinboard_frame_three_second,
+			pinboard_frame_four_first,
+			pinboard_frame_four_second,
+			pinboard_frame_five_first,
+			pinboard_frame_five_second,
+			pinboard_frame_six_first,
+			pinboard_frame_six_second,
+			pinboard_frame_seven_first,
+			pinboard_frame_seven_second,
+			pinboard_frame_eight_first,
+			pinboard_frame_eight_second,
+			pinboard_frame_nine_first,
+			pinboard_frame_nine_second,
+			pinboard_frame_ten_first,
+			pinboard_frame_ten_second,
+			pinboard_frame_ten_third,
+			pinboard_date
+		)
+		VALUES(
+			#{pinboardFrameOneFirst},
+			#{pinboardFrameOneSecond},
+			#{pinboardFrameTwoFirst},
+			#{pinboardFrameTwoSecond},
+			#{pinboardFrameThreeFirst},
+			#{pinboardFrameThreeSecond},
+			#{pinboardFrameFourFirst},
+			#{pinboardFrameFourSecond},
+			#{pinboardFrameFiveFirst},
+			#{pinboardFrameFiveSecond},
+			#{pinboardFrameSixFirst},
+			#{pinboardFrameSixSecond},
+			#{pinboardFrameSevenFirst},
+			#{pinboardFrameSevenSecond},
+			#{pinboardFrameEightFirst},
+			#{pinboardFrameEightSecond},
+			#{pinboardFrameNineFirst},
+			#{pinboardFrameNineSecond},
+			#{pinboardFrameTenFirst},
+			#{pinboardFrameTenSecond},
+			#{pinboardFrameTenThird},
+			NOW()	
+		)
+		
+	</insert>
+	
+	
+	<insert id="insertFrameScoreOne" parameterType="com.gdu.bowling.FrameScore" useGeneratedKeys="true" keyProperty="framescoreNo">
+		INSERT INTO bowling_framescore(
+			framescore_score_one,
+			framescore_score_two,
+			framescore_score_three,
+			framescore_score_four,
+			framescore_score_five,
+			framescore_score_six,
+			framescore_score_seven,
+			framescore_score_eight,
+			framescore_score_nine,
+			framescore_score_ten,
+			framescore_date
+		)
+		VALUES(
+			#{framescoreScoreOne},
+			#{framescoreScoreTwo},
+			#{framescoreScoreThree},
+			#{framescoreScoreFour},
+			#{framescoreScoreFive},
+			#{framescoreScoreSix},
+			#{framescoreScoreSeven},
+			#{framescoreScoreEight},
+			#{framescoreScoreNine},
+			#{framescoreScoreTen},
+			NOW()
+		)
+		
+	</insert>
+	
+
+	<insert id="insertScoreBoardOne" parameterType="com.gdu.bowling.ScoreBoard">
+		INSERT INTO bowling_scoreboard(
+			member_name,
+			framescore_no,
+			pinboard_no,
+			scoreboard_date
+		)
+		VALUES(
+			#{memberName},
+			#{framescoreNo},
+			#{pinboardNo},
+			NOW()		
+		)
+	</insert>
+
+</mapper>

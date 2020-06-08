@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>bowlingRank</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<style>
+    #bowlingBody td {
+        height: 50px;
+    }
+    .pinBoardClass {
+    	height: 100px;
+    	text-align: center;
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <h1>Bowling Rank</h1>
+        <a href="./bowling.html">게임하러 가기</a>
+
+        <table class="table table-bordered" id="scoreTable" style="table-layout: fixed; word-break: break-all;">
+            <thead class="thead-dark">
+                <tr>
+                	<th style="width: 10%;">이름</th>
+                    <th style="width: 8%;" colspan="2">1</th>
+                    <th style="width: 8%;" colspan="2">2</th>
+                    <th style="width: 8%;" colspan="2">3</th>
+                    <th style="width: 8%;" colspan="2">4</th>
+                    <th style="width: 8%;" colspan="2">5</th>
+                    <th style="width: 8%;" colspan="2">6</th>
+                    <th style="width: 8%;" colspan="2">7</th>
+                    <th style="width: 8%;" colspan="2">8</th>
+                    <th style="width: 8%;" colspan="2">9</th>
+                    <th style="width: 10%;" colspan="3">10</th>
+                    <th style="width: 8%;" colspan="2">점수</th>
+                </tr>
+            </thead>
+
+            <!-- 점수판 생성 -->
+            <tbody id="bowlingBody" style="background-color: #CEF6F5; font-weight:bold;">
+
+            </tbody>
+
+        </table>
+
+    </div>
+</body>
+<script>
+
+    $.ajax({
+        url: './getScoreRankList',
+        type: 'GET',       
+        success: function(data) {
+            console.log('데이터 가져오기');
+            $.each(data, function(i, item){       
+            	$('#bowlingBody').append('<tr class="pinBoardClass"><td rowspan="2">' + item.memberName + '</td><td>' + 
+            			item.pinboardFrameOneFirst + '</td><td>' + item.pinboardFrameOneSecond + '</td><td>' + 
+            			item.pinboardFrameTwoFirst + '</td><td>' + item.pinboardFrameTwoSecond + '</td><td>' + 
+            			item.pinboardFrameThreeFirst + '</td><td>' + item.pinboardFrameThreeSecond + '</td><td>' + 
+            			item.pinboardFrameFourFirst + '</td><td>' + item.pinboardFrameFourSecond + '</td><td>' + 
+            			item.pinboardFrameFiveFirst + '</td><td>' + item.pinboardFrameFiveSecond + '</td><td>' + 
+            			item.pinboardFrameSixFirst + '</td><td>' + item.pinboardFrameSixSecond + '</td><td>' + 
+            			item.pinboardFrameSevenFirst + '</td><td>' + item.pinboardFrameSevenSecond + '</td><td>' + 
+            			item.pinboardFrameEightFirst + '</td><td>' + item.pinboardFrameEightSecond + '</td><td>' + 
+            			item.pinboardFrameNineFirst + '</td><td>' + item.pinboardFrameNineSecond + '</td><td>' + 
+            			item.pinboardFrameTenFirst + '</td><td>' + item.pinboardFrameTenSecond + '</td><td>' + item.pinboardFrameTenThird + '</td><td colspan="2" rowspan="2">' + 
+            			item.framescoreScoreTen+ '</td></tr>');            	
+            	$('#bowlingBody').append('<tr><td colspan="2">' + item.framescoreScoreOne + 
+            			'</td><td colspan="2">' + item.framescoreScoreTwo +
+            			'</td><td colspan="2">' + item.framescoreScoreThree +
+            			'</td><td colspan="2">' + item.framescoreScoreFour +
+            			'</td><td colspan="2">' + item.framescoreScoreFive +
+            			'</td><td colspan="2">' + item.framescoreScoreSix +
+            			'</td><td colspan="2">' + item.framescoreScoreSeven +
+            			'</td><td colspan="2">' + item.framescoreScoreEight +
+            			'</td><td colspan="2">' + item.framescoreScoreNine +
+            			'</td><td colspan="3">' + item.framescoreScoreTen);
+            })
+        }
+    });
+
+</script>
+
+
+</html>

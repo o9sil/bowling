@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<style>
+    #bowlingBody td {
+        height: 50px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>Bowling System</h1>
+        <a href="./bowlingRank.html">순위보기</a>
+
+        <table class="table table-bordered" id="scoreTable" style="table-layout: fixed; word-break: break-all;">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="width: 10%;">이름</th>
+                    <th style="width: 8%;" colspan="2">1</th>
+                    <th style="width: 8%;" colspan="2">2</th>
+                    <th style="width: 8%;" colspan="2">3</th>
+                    <th style="width: 8%;" colspan="2">4</th>
+                    <th style="width: 8%;" colspan="2">5</th>
+                    <th style="width: 8%;" colspan="2">6</th>
+                    <th style="width: 8%;" colspan="2">7</th>
+                    <th style="width: 8%;" colspan="2">8</th>
+                    <th style="width: 8%;" colspan="2">9</th>
+                    <th style="width: 10%;" colspan="3">10</th>
+                    <th style="width: 8%;" colspan="2">점수</th>
+                </tr>
+            </thead>
+
+            <!-- 점수판 생성 -->
+            <tbody id="bowlingBody" style="background-color: #2E9AFE; font-weight:bold;">
+
+            </tbody>
+
+        </table>
+
+        <div>
+	        <div class="form-group">
+				<label for="playerCount">플레이어 인원 선택</label>
+				<select class="form-control" id="playerCount">
+					<option value="0">인원을 선택하세요.</option>
+					<option value="1">1명</option>
+					<option value="2">2명</option>
+					<option value="3">3명</option>
+					<option value="4">4명</option>
+				</select> 
+			</div>		            
+        </div>
+
+
+
+
+        <div id="playerFrame" style="display: none;">
+            <div>
+            	<h2>
+	            	<span class="badge badge-secondary">
+	            		<span id="playerName"></span> 차례 &nbsp;&nbsp;&nbsp;<span id="frameNum"></span> 프레임
+	            	</span>
+                </h2>				
+			</div>
+
+        </div>
+
+
+        <!-- 볼링핀 -->
+        <div id="bowlingPin" style="text-align: center; display: none;">
+			<div class="form-check-inline">
+				<label class="form-check-label"> 
+					<input type="checkbox" class="form-check-input pin" id="pin1">1
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label"> 
+					<input type="checkbox" class="form-check-input pin" id="pin2">2
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label"> 
+					<input type="checkbox" class="form-check-input pin" id="pin3">3
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label"> 
+					<input type="checkbox" class="form-check-input pin" id="pin4">4
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label"> 
+					<input type="checkbox" class="form-check-input pin" id="pin5">5
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label"> 
+					<input type="checkbox" class="form-check-input pin" id="pin6">6
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label"> 
+					<input type="checkbox" class="form-check-input pin" id="pin7">7
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label"> 
+					<input type="checkbox" class="form-check-input pin" id="pin8">8
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label"> 
+					<input type="checkbox" class="form-check-input pin" id="pin9">9
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label"> 
+					<input type="checkbox" class="form-check-input pin" id="pin10">10
+				</label>
+			</div>
+
+
+
+            <div style="margin-top: 20px;">
+                <button type="button" id="play" class="btn btn-primary">play</button>
+            </div>
+            <button id="allCheck">전부선택</button>
+        </div>
+
+        <!-- 플레이어 이름 입력칸 출력 -->
+        <div id="playerList">
+
+        </div>
+		
+
+	</div>
+</body>
+<script src="./bowling.js" charset="utf-8"></script>
+
+</html>
