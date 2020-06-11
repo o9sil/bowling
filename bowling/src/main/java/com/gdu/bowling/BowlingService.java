@@ -97,6 +97,7 @@ public class BowlingService {
 				}else if(j % 10 == 9) {
 					p.setPinboardFrameTenFirst(pinBoardFrame.get(k).get(0));
 					p.setPinboardFrameTenSecond(pinBoardFrame.get(k).get(1));
+					p.setPinboardFrameTenThird(pinBoardFrame.get(k).get(2));
 					
 					f.setFramescoreScoreTen(f.getFramescoreScoreNine() + scoreBoard.get(k).get(3));
 					
